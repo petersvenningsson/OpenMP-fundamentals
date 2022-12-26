@@ -29,17 +29,19 @@ Benchmark 1: ./hello
 Exc 2.
 Exercise consists of numerically calculating an intergral. Solution consists of
 cyclic allocation of tasks to threads to calculate partial sums. The partial
-sum is reduced to a the full integral.
+sum is reduced to a the full integral in a critical section.
+
+This type of naivly parallelizable problem can also be the parallelized by the
+one line pragma `#pragma omp parallel for reduction (+:sum)`.
 
 ```
 Single-threaded runtime ...
 Benchmark 1: ./pi
-Time (mean ± σ):      1.327 s ±  0.011 s    [User: 1.323 s, System: 0.001 s]
-  Range (min … max):    1.311 s …  1.350 s    10 runs
+  Time (mean ± σ):      1.303 s ±  0.007 s    [User: 1.302 s, System: 0.001 s]
+  Range (min … max):    1.299 s …  1.318 s    10 runs
  
 Multi-threaded runtime ...
 Benchmark 1: ./pi
-  Time (mean ± σ):      1.761 s ±  0.072 s    [User: 6.439 s, System: 0.013 s]
-  Range (min … max):    1.633 s …  1.881 s    10 runs
-
+  Time (mean ± σ):     920.0 ms ± 292.4 ms    [User: 3639.9 ms, System: 2.1 ms]
+  Range (min … max):   453.3 ms … 1172.5 ms    10 runs
 ```
