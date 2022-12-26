@@ -6,7 +6,7 @@ cd build
 cmake ..
 make
 
-for bin in hello
+for bin in hello pi
 do
     echo "Single-threaded runtime ..."
     OMP_NUM_THREADS=1 hyperfine "./$bin" 2> /dev/null
