@@ -26,7 +26,7 @@ Benchmark 1: ./hello
   Range (min … max):     0.5 ms …  27.8 ms    127 runs
 ```
 
-Exc 2.
+# Exc 2.
 Exercise consists of numerically calculating an intergral. Solution consists of
 cyclic allocation of tasks to threads to calculate partial sums. The partial
 sum is reduced to a the full integral in a critical section.
@@ -44,4 +44,35 @@ Multi-threaded runtime ...
 Benchmark 1: ./pi
   Time (mean ± σ):     920.0 ms ± 292.4 ms    [User: 3639.9 ms, System: 2.1 ms]
   Range (min … max):   453.3 ms … 1172.5 ms    10 runs
+```
+
+# Exc 3. 
+Memory model for OpenMP. The exercise involves finding bugs in a program which
+uses OpenMP. The bugs are mainly related to private/shared variables.
+
+openMp supports a shared memory model. All threads share and address space.
+Each thread has its own cache. A common source for decreased performance is
+that two threads frequently access and change memory on the same cache line.
+The cache line then frequenctly have to be reloaded from the shared memory.
+
+## Memory model of OpenMP - relaxed-consistancy
+Views of variables (value in cache, buffer, registry, DRAM) may have different
+values. The temoporary views are made consistent at certan points in the
+program. The views are made consitant by flush operations (DRAM is read).
+
+Flush can be called by `pragma omp flush(x)`. OpenMP applies flushes when
+needed, entry/exit of parallel/critical/barrier regions. Good advice is to never
+call omp flush(x).
+
+```
+Single-threaded runtime ...
+Benchmark 1: ./mandel
+  Time (mean ± σ):      1.909 s ±  0.005 s    [User: 1.908 s, System: 0.001 s]
+  Range (min … max):    1.903 s …  1.919 s    10 runs
+ 
+Multi-threaded runtime ...
+Benchmark 1: ./mandel
+  Time (mean ± σ):     893.7 ms ±  31.0 ms    [User: 2201.9 ms, System: 3.1 ms]
+  Range (min … max):   875.7 ms … 974.8 ms    10 runs
+
 ```
