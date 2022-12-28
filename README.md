@@ -76,3 +76,34 @@ Benchmark 1: ./mandel
   Range (min … max):   875.7 ms … 974.8 ms    10 runs
 
 ```
+
+# Exc 4.
+
+## Irregular parallelism
+Regular parallelism
+- Spacially regular datastructures, e.g. array
+- Regular in time - Compute needed for the blocks is similar
+
+Irregular parallelism
+- Number of time for task is unpredicably
+- Datastucture may be linked list with elements all over the memory space
+
+One example of a irregular problem is traversing a linked list and performing
+operations on each element.
+
+This type of problem is explored in Exc 4 which comprise calculating the
+a fibonacci sequence for every element in a linked list. The problem was solved
+by cyclic assignment of the nodes. A easier way to perform this type of problem
+is using the task construct.
+
+```
+Single-threaded runtime ...
+Benchmark 1: ./linked
+  Time (mean ± σ):      8.524 s ±  0.024 s    [User: 8.523 s, System: 0.000 s]
+  Range (min … max):    8.505 s …  8.583 s    10 runs
+ 
+Multi-threaded runtime ...
+Benchmark 1: ./linked
+  Time (mean ± σ):      4.798 s ±  0.131 s    [User: 11.385 s, System: 0.002 s]
+  Range (min … max):    4.590 s …  5.000 s    10 runs
+```
